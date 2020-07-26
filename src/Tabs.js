@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Tab from './Tab';
+import './css/Tabs.css';
 
 class Tabs extends Component {
     static propTypes = {
@@ -11,7 +12,7 @@ class Tabs extends Component {
         super(props);
 
         this.state = {
-            activeTab: this.props.children[1].props.label,
+            activeTab: this.props.children[0].props.label,
         };
     }
 

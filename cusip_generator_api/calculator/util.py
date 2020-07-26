@@ -8,7 +8,7 @@ def calculate_expiry_year(expiry_month, truncated_year):
     divisor = 10 if len(truncated_year) == 1 else 100
 
     temp_year = int(today.year / divisor) * divisor + int(truncated_year)
-    if date(temp_year, expiry_month, 1) <= date(today.year, today.month, 1):
+    if date(temp_year, expiry_month, 1) < date(today.year, today.month, 1):
         temp_year += divisor
 
     return str(temp_year)

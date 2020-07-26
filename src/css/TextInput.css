@@ -1,29 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.tab-list {
-  border-bottom: 1px solid #ccc;
-  padding-left: 0;
-}
-
-.tab-list:hover {
-    cursor: pointer
-}
-
-.tab-list-item {
-  display: inline-block;
-  list-style: none;
-  margin-bottom: -1px;
-  padding: 0.5rem 0.75rem;
-}
-
-.tab-list-active {
-  background-color: white;
-  border: solid #ccc;
-  border-width: 1px 1px 0 1px;
-}
-
 form {
     width: 80%;
     margin: auto;
@@ -32,13 +6,8 @@ form {
     display: -moz-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-}
-
-form .align-right {
-    float: right;
-    margin-right: 150px;
 }
 
 div.output {
@@ -50,10 +19,15 @@ div.output {
     resize: none;
     text-align: left;
     font-family: inherit;
+    align-items: flex-end;
 }
 
 textarea {
     resize: none;
+}
+
+span.error {
+    color: darkred;
 }
 
 .box {
@@ -78,6 +52,7 @@ textarea {
     width: 10%;
     margin-left: 16px;
     margin-right: 10px;
+    margin-top: 170px;
     font-size: 20px;
     background-color: #4593e3;
     color: white;

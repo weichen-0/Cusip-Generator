@@ -1,0 +1,19 @@
+version: "3"
+services:
+  cusip_generator_api:
+    container_name: cusip_generator_api
+    build:
+      context: .
+      dockerfile: Dockerfile_api
+    ports:
+      - "5000:5000"
+    restart: always
+  cusip_generator_ui:
+    container_name: cusip_generator_ui
+    build:
+      context: .
+      dockerfile: Dockerfile_ui
+    ports:
+      - "3000:3000"
+    restart: always
+    stdin_open: true

@@ -11,7 +11,7 @@ def validate_sector(sector):
 def validate_prefix(prefix):
     if len(prefix) < 2:
         raise ValueError(InvalidTickerError.PREFIX_TOO_SHORT.value)
-    elif not re.findall(r'^([A-Z]{1,3})$', prefix):
+    elif not re.findall(r'^([A-Z]{1,3})$', prefix.strip()):
         raise ValueError(InvalidTickerError.PREFIX.value)
 
 

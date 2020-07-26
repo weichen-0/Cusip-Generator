@@ -1,9 +1,11 @@
 import io
 import csv
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from cusip_generator_api.controller import get_cusip, get_cusips
 
 app = Flask(__name__)
+cors = CORS(app)
 
 
 @app.route('/api/generate-cusip/ticker/<string:ticker>', methods=['GET'])
@@ -25,12 +27,14 @@ def generate_cusips(tickers):
 
 @app.route('/api/generate-cusip/list', methods=['POST'])
 def generate_cusips_from_list():
+    print(request.data.decode('utf-8').splitlines())
     tickers = request.data.decode('utf-8').splitlines()
     return generate_cusips(tickers)
 
 
 @app.route('/api/generate-cusip/file', methods=['POST'])
 def generate_cusips_from_file():
+    print(request.files)
     # if POST request does not have the file part, or file is empty
     if 'file' not in request.files or not request.files['file']:
         return jsonify(errors=['Missing file in the file parameter.']), 400
@@ -46,4 +50,4 @@ def generate_cusips_from_file():
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

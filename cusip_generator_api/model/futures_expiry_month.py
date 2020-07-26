@@ -1,4 +1,4 @@
-from .invalid_ticker_error import InvalidTickerError
+from cusip_generator_api.model.invalid_ticker_error import InvalidTickerError
 
 
 class FuturesExpiryMonth:

@@ -6,12 +6,13 @@ from cusip_generator_api.model.clock import get_today_date
 def calculate_expiry_year(expiry_month, truncated_year):
     today = get_today_date()
     divisor = 10 if len(truncated_year) == 1 else 100
+    expiry_year = int(today.year / divisor) * divisor + int(truncated_year)
 
-    temp_year = int(today.year / divisor) * divisor + int(truncated_year)
-    if date(temp_year, expiry_month, 1) < date(today.year, today.month, 1):
-        temp_year += divisor
+    has_month_passed = date(expiry_year, expiry_month, 1) < date(today.year, today.month, 1)
+    if has_month_passed:
+        expiry_year += divisor
 
-    return str(temp_year)
+    return str(expiry_year)
 
 
 # Given 8-digit cusip result, append check digit

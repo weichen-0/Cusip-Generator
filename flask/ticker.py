@@ -4,7 +4,7 @@ import re
 class Ticker: 
     def __init__(self, name):
         self.name = name
-        result = re.findall('^([A-Z]{1,3})\s?([A-Z])([0-9]{1,2}) (Comdty|Index)$', name)[0]
+        result = re.findall('^([A-Z]{2,3}|[A-Z]\s)([A-Z])([0-9]{1,2}) (Comdty|Index)$', name)[0]
 
         self.prefix = result[0]
         self.exp_month = result[1]
@@ -14,10 +14,21 @@ class Ticker:
     def resolve_year(self, exp_month, exp_year):         # find the next immediate year ending in exp_year
         today = date.today()                             # tested with date(2017, 12, 1) 
         divisor = 10 if len(exp_year) == 1 else 100 
-        month_map = ['', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'Q', 'U', 'V', 'X', 'Z'] # index from 1-12
+        month_map = {'F': 1,
+                     'G': 2,
+                     'H': 3,
+                     'J': 4,
+                     'K': 5,
+                     'M': 6,
+                     'N': 7,
+                     'Q': 8,
+                     'U': 9,
+                     'V': 10,
+                     'X': 11,
+                     'Z': 12}
 
         temp_year = int(today.year / divisor) * divisor + int(exp_year)
-        temp_month = month_map.index(exp_month)          # assume exp_month provided by Bloomberg always exist in month_map
+        temp_month = month_map[exp_month]          # assume exp_month provided by Bloomberg always exist in month_map
         if date(temp_year, temp_month, 31) < today:
             temp_year += divisor
         
